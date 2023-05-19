@@ -7,8 +7,9 @@ export default function Home() {
     <main className="min-h-screen overflow-x-hidden overflow-y-auto">
       <div className="w-[59.5vh] h-[60.5vh]">
         <ScoreBoard />
-        <PlayGround />
-        <GameMap />
+        <PlayGround>
+          <GameMap />
+        </PlayGround>
       </div>
     </main>
   )

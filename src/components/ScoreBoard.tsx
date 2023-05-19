@@ -10,8 +10,9 @@ function ScoreBoard() {
           width={50}
           height={50}
           alt="apple"
+          priority
         />
-        <span className="text-3xl text-white font-semibold">0</span>
+        <span className="text-2xl text-white font-semibold">0</span>
       </div>
       <div className="flex items-center gap-x-2">
         <Image
@@ -20,8 +21,9 @@ function ScoreBoard() {
           width={50}
           height={50}
           alt="cup"
+          priority
         />
-        <span className="text-3xl text-white font-semibold">0</span>
+        <span className="text-2xl text-white font-semibold">0</span>
       </div>
     </div>
   )
