@@ -1,6 +1,6 @@
-const gameObjects: GameObject[] = []
+const gameObjects: CGameObject[] = []
 
-export class GameObject {
+export class CGameObject {
   timeDelta = 0
   hasCalledStart = false
 

@@ -1,16 +1,17 @@
 'use client'
 
 import { useEffect, useRef } from 'react'
-import { GameMap as CGameMap } from '@/core/GameMap'
+import { CGameMap } from '@/core/CGameMap'
 
 function GameMap() {
   const divRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
 
   useEffect(() => {
-    if (!canvasRef.current?.getContext('2d') || !divRef.current) return
+    const context = canvasRef.current?.getContext('2d')
+    if (!context || !divRef.current) return
 
-    new CGameMap(canvasRef.current.getContext('2d')!, divRef.current)
+    new CGameMap(context, divRef.current)
   }, [])
 
   return (
@@ -18,7 +19,7 @@ function GameMap() {
       ref={divRef}
       className="h-full w-full flex justify-center items-center"
     >
-      <canvas ref={canvasRef} className="bg-[#AAD751]"></canvas>
+      <canvas ref={canvasRef} className="bg-[#AAD751] focus:outline-none" tabIndex={0}></canvas>
     </div>
   )
 }
