@@ -1,6 +1,11 @@
+'use client'
+
+import { useStore } from '@/store'
 import Image from 'next/image'
 
 function ScoreBoard() {
+  const { score, record } = useStore()
+
   return (
     <div className="h-[8vh] bg-[#4A752C] flex justify-around items-center select-none">
       <div className="flex items-center gap-x-2">
@@ -12,7 +17,7 @@ function ScoreBoard() {
           alt="apple"
           priority
         />
-        <span className="text-2xl text-white font-semibold">0</span>
+        <span className="text-2xl text-white font-semibold">{score}</span>
       </div>
       <div className="flex items-center gap-x-2">
         <Image
@@ -23,7 +28,7 @@ function ScoreBoard() {
           alt="cup"
           priority
         />
-        <span className="text-2xl text-white font-semibold">0</span>
+        <span className="text-2xl text-white font-semibold">{record}</span>
       </div>
     </div>
   )

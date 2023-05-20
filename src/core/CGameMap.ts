@@ -1,3 +1,4 @@
+import { Actions, State } from '@/store'
 import { CGameObject } from './CGameObject'
 import { CSnake, Direction } from './CSnake'
 
@@ -15,8 +16,13 @@ export class CGameMap extends CGameObject {
   snake: CSnake
   directions: Direction[]
   status: Status
+  store: State & Actions
 
-  constructor(ctx: CanvasRenderingContext2D, parent: HTMLElement) {
+  constructor(
+    ctx: CanvasRenderingContext2D,
+    parent: HTMLElement,
+    store: State & Actions
+  ) {
     super()
 
     this.ctx = ctx
@@ -25,6 +31,7 @@ export class CGameMap extends CGameObject {
     this.snake = new CSnake(this.ctx, this)
     this.directions = []
     this.status = Status.waiting
+    this.store = store
   }
 
   start(): void {

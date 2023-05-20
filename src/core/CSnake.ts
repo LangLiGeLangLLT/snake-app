@@ -98,7 +98,7 @@ export class CSnake extends CGameObject {
     }
 
     for (let i = 2; i < this.cells.length; i++) {
-      if (head.i === this.cells[i].i && head.j === -this.cells[i].j) {
+      if (head.i === this.cells[i].i && head.j === this.cells[i].j) {
         return true
       }
     }
@@ -155,6 +155,9 @@ export class CSnake extends CGameObject {
         const cell = this.cells[this.cells.length - 1]
         this.tailCell = new CCell(cell.i, cell.j)
         this.putAnApple()
+        const score = this.gameMap.store.score + 1
+        this.gameMap.store.updateScore(score)
+        this.gameMap.store.updateRecord(score)
       }
     }
   }
