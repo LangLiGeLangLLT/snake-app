@@ -7,7 +7,7 @@ function ScoreBoard() {
   const { score, record } = useStore()
 
   return (
-    <div className="h-[8vh] bg-[#4A752C] flex justify-around items-center select-none">
+    <div className="h-[8vh] bg-[#4A752C] flex justify-around items-center select-none rounded-t-xl">
       <div className="flex items-center gap-x-2">
         <Image
           className="w-[6vh]"
