@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useMemo, useRef } from 'react'
+import { useCallback, useEffect, useMemo, useRef } from 'react'
 import { CGameMap } from '@/core/CGameMap'
 import { useStore } from '@/store'
 
@@ -10,6 +10,10 @@ function GameMap() {
   const divRef = useRef<HTMLDivElement | null>(null)
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const store = useStore()
+
+  const restart = useCallback(() => {
+    gameMap.restart()
+  }, [])
 
   useEffect(() => {
     const context = canvasRef.current?.getContext('2d')
@@ -31,6 +35,15 @@ function GameMap() {
         className="bg-[#AAD751] focus:outline-none"
         tabIndex={0}
       ></canvas>
+
+      {store.restart && (
+        <button
+          onClick={restart}
+          className="absolute pointer-events-auto rounded-md bg-indigo-600 p-[3vh] font-semibold leading-5 text-white hover:bg-indigo-500 text-[3vh]"
+        >
+          Restart
+        </button>
+      )}
     </div>
   )
 }

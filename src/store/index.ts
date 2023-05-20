@@ -12,12 +12,11 @@ export type Actions = {
   updateRecord: (score: number) => void
   updateRestart: (restart: boolean) => void
 }
-
 export const useStore = create(
   immer<State & Actions>((set) => ({
     score: 0,
     record: 0,
-    restart: false,
+    restart: true,
     updateScore: (score: number) =>
       set((state) => {
         state.score = score

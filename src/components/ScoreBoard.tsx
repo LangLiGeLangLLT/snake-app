@@ -17,7 +17,7 @@ function ScoreBoard() {
           alt="apple"
           priority
         />
-        <span className="text-2xl text-white font-semibold">{score}</span>
+        <span className="text-[3vh] text-white font-semibold">{score}</span>
       </div>
       <div className="flex items-center gap-x-2">
         <Image
@@ -28,7 +28,7 @@ function ScoreBoard() {
           alt="cup"
           priority
         />
-        <span className="text-2xl text-white font-semibold">{record}</span>
+        <span className="text-[3vh] text-white font-semibold">{record}</span>
       </div>
     </div>
   )

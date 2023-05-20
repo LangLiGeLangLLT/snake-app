@@ -84,11 +84,23 @@ export class CGameMap extends CGameObject {
   win(): void {
     this.snake.color = 'white'
     this.status = Status.win
+    this.store.updateRestart(true)
   }
 
   lose(): void {
     this.snake.color = 'white'
     this.status = Status.lose
+    this.store.updateRestart(true)
+  }
+
+  restart(): void {
+    this.store.updateScore(0)
+    this.status = Status.waiting
+    this.snake.destroy()
+    this.snake = new CSnake(this.ctx, this)
+    this.store.updateRestart(false)
+    this.ctx.canvas.focus()
+    this.directions = []
   }
 
   update(): void {
