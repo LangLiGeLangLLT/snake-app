@@ -16,7 +16,7 @@ export const useStore = create(
   immer<State & Actions>((set) => ({
     score: 0,
     record: 0,
-    restart: true,
+    restart: false,
     updateScore: (score: number) =>
       set((state) => {
         state.score = score
