@@ -19,6 +19,10 @@ export class CSnake extends CGameObject {
   direction: number
   eps: number
   speed: number
+  appCell: CCell
+  appImage: any
+  eating: boolean
+  tailCell: CCell | null
 
   constructor(ctx: CanvasRenderingContext2D, gameMap: CGameMap) {
     super()
@@ -36,12 +40,42 @@ export class CSnake extends CGameObject {
     this.direction = Direction.right
     this.eps = 1e-1
     this.speed = 8
+    this.appCell = new CCell(-1, -1)
+    this.appImage = new Image()
+    this.appImage.src = '/images/apple.png'
+    this.eating = false
+    this.tailCell = null
   }
 
   start(): void {
     this.cells.push(new CCell(4, 7))
     for (let i = 4; i >= 1; i--) {
       this.cells.push(new CCell(i, 7))
+    }
+    this.putAnApple()
+  }
+
+  putAnApple(): void {
+    const positions = new Set()
+    for (let i = 0; i < 17; i++) {
+      for (let j = 0; j < 15; j++) {
+        positions.add(`${i}-${j}`)
+      }
+    }
+
+    for (let cell of this.cells) {
+      positions.delete(`${cell.i}-${cell.j}`)
+    }
+
+    const items = Array.from(positions) as string[]
+    if (items.length === 0) {
+      this.gameMap.win()
+    } else {
+      let [x, y]: (string | number)[] =
+        items[Math.floor(Math.random() * items.length)].split('-')
+      x = parseInt(x)
+      y = parseInt(y)
+      this.appCell = new CCell(x, y)
     }
   }
 
@@ -92,6 +126,12 @@ export class CSnake extends CGameObject {
       }
       this.cells = newCells
 
+      if (this.eating) {
+        this.tailCell && this.cells.push(this.tailCell)
+        this.eating = false
+        this.tailCell = null
+      }
+
       const directions = this.gameMap.directions
       while (
         directions.length &&
@@ -109,6 +149,13 @@ export class CSnake extends CGameObject {
       if (this.checkDie()) {
         this.gameMap.lose()
       }
+
+      if (headi === this.appCell.i && headj === this.appCell.j) {
+        this.eating = true
+        const cell = this.cells[this.cells.length - 1]
+        this.tailCell = new CCell(cell.i, cell.j)
+        this.putAnApple()
+      }
     }
   }
 
@@ -121,10 +168,23 @@ export class CSnake extends CGameObject {
 
   render(): void {
     const L = this.gameMap.L
+
+    if (this.eating) {
+      this.tailCell && this.cells.push(this.tailCell)
+    }
+
+    this.ctx.drawImage(
+      this.appImage,
+      this.appCell.i * L,
+      this.appCell.j * L,
+      L,
+      L
+    )
+
     this.ctx.fillStyle = this.color
     for (const cell of this.cells) {
       this.ctx.beginPath()
-      this.ctx.arc(cell.x * L, cell.y * L, L / 2 * 0.8, 0, Math.PI * 2)
+      this.ctx.arc(cell.x * L, cell.y * L, (L / 2) * 0.8, 0, Math.PI * 2)
       this.ctx.fill()
     }
 
@@ -149,6 +209,10 @@ export class CSnake extends CGameObject {
           L * 0.8
         )
       }
+    }
+
+    if (this.eating) {
+      this.cells.pop()
     }
   }
 }
