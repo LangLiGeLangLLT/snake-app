@@ -11,7 +11,7 @@ function ScoreBoard() {
       <div className="flex items-center gap-x-2">
         <Image
           className="w-[6vh]"
-          src="/images/apple.png"
+          src="/snake_app/images/apple.png"
           width={50}
           height={50}
           alt="apple"
@@ -22,7 +22,7 @@ function ScoreBoard() {
       <div className="flex items-center gap-x-2">
         <Image
           className="w-[5vh]"
-          src="/images/cup.png"
+          src="/snake_app/images/cup.png"
           width={50}
           height={50}
           alt="cup"

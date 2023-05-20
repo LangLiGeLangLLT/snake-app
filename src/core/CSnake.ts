@@ -42,7 +42,7 @@ export class CSnake extends CGameObject {
     this.speed = 8
     this.appCell = new CCell(-1, -1)
     this.appImage = new Image()
-    this.appImage.src = '/images/apple.png'
+    this.appImage.src = '/snake_app/images/apple.png'
     this.eating = false
     this.tailCell = null
   }

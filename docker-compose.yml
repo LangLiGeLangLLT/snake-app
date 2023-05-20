@@ -1,9 +1,9 @@
 version: '3'
 services:
-  nextjs:
+  snake_app:
     build: ./
   nginx:
-    build: ./nginx
+    build: ../nginx
     ports:
       - 80:80
       - 443:443
